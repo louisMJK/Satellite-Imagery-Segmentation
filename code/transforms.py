@@ -5,8 +5,8 @@ from torchvision import transforms
 from torchvision.transforms import functional as F
 
 
-MEAN = np.array([377.9830716, 653.4058739, 702.1834053, 2573.849324, 2344.568628, 1432.163695] * 3)
-STD = np.array([171.5116587, 215.5407551, 364.3545396, 686.5730746, 769.6448444, 675.9192684] * 3)
+MEAN = np.array([482.9781,  800.0932,  904.2928, 2934.5598, 2611.7449, 1713.6191] * 3)
+STD = np.array([152.5241, 188.8325, 330.3239, 333.6996, 529.5475, 519.6208] * 3)
 
 
 class SegmentationTrainTransform:
