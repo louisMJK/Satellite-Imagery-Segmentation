@@ -1,0 +1,84 @@
+UNet(
+  (down_conv): ModuleList(
+    (0): DoubleConvolution(
+      (first): Conv2d(18, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act1): ReLU()
+      (second): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act2): ReLU()
+    )
+    (1): DoubleConvolution(
+      (first): Conv2d(64, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act1): ReLU()
+      (second): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act2): ReLU()
+    )
+    (2): DoubleConvolution(
+      (first): Conv2d(128, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act1): ReLU()
+      (second): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act2): ReLU()
+    )
+    (3): DoubleConvolution(
+      (first): Conv2d(256, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act1): ReLU()
+      (second): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act2): ReLU()
+    )
+  )
+  (down_sample): ModuleList(
+    (0-3): 4 x DownSample(
+      (pool): MaxPool2d(kernel_size=2, stride=2, padding=0, dilation=1, ceil_mode=False)
+    )
+  )
+  (middle_conv): DoubleConvolution(
+    (first): Conv2d(512, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (act1): ReLU()
+    (second): Conv2d(1024, 1024, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (act2): ReLU()
+  )
+  (up_sample): ModuleList(
+    (0): UpSample(
+      (up): ConvTranspose2d(1024, 512, kernel_size=(2, 2), stride=(2, 2))
+    )
+    (1): UpSample(
+      (up): ConvTranspose2d(512, 256, kernel_size=(2, 2), stride=(2, 2))
+    )
+    (2): UpSample(
+      (up): ConvTranspose2d(256, 128, kernel_size=(2, 2), stride=(2, 2))
+    )
+    (3): UpSample(
+      (up): ConvTranspose2d(128, 64, kernel_size=(2, 2), stride=(2, 2))
+    )
+  )
+  (up_conv): ModuleList(
+    (0): DoubleConvolution(
+      (first): Conv2d(1024, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act1): ReLU()
+      (second): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act2): ReLU()
+    )
+    (1): DoubleConvolution(
+      (first): Conv2d(512, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act1): ReLU()
+      (second): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act2): ReLU()
+    )
+    (2): DoubleConvolution(
+      (first): Conv2d(256, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act1): ReLU()
+      (second): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act2): ReLU()
+    )
+    (3): DoubleConvolution(
+      (first): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act1): ReLU()
+      (second): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (act2): ReLU()
+    )
+  )
+  (concat): ModuleList(
+    (0-3): 4 x CropAndConcat()
+  )
+  (final_conv): Conv2d(64, 14, kernel_size=(1, 1), stride=(1, 1))
+)
+
