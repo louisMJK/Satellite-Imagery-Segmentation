@@ -19,6 +19,7 @@ import matplotlib.pyplot as plt
 from utils import init_distributed_mode, mkdir, MetricLogger
 from transforms import SegmentationTrainTransform, SegmentationValTransform
 from models.unet import UNet
+from models.lenet import LeNet
 from dataset import GeoCropDataset
 
 
