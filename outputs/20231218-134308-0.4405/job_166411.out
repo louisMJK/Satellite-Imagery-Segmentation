@@ -1,0 +1,93 @@
+[2023-12-18 13:42:54,003] torch.distributed.run: [WARNING] 
+[2023-12-18 13:42:54,003] torch.distributed.run: [WARNING] *****************************************
+[2023-12-18 13:42:54,003] torch.distributed.run: [WARNING] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+[2023-12-18 13:42:54,003] torch.distributed.run: [WARNING] *****************************************
+| distributed init (rank 1): env://
+| distributed init (rank 0): env://
+Namespace(model_checkpoint='../checkpoints/model_jac_0.4220.pth', sched='poly', optim='adamW', momentum=None, weight_decay=0.0001, lr_base=5e-05, lr_decay=None, mode=None, epoch_size_up=None, epochs=20, batch_size=16, workers=4, data_dir='../data/', out_dir='../outputs/', verbose=False, dist_url='env://', world_size=2, distributed=True, exp_dir='../outputs/20231218-134308/', rank=0, gpu=0, dist_backend='nccl')
+
+Training on cuda.
+
+Dataset loaded. Train set size: 3083, Val. set size: 771.
+
+=============================================================================================================================
+Layer (type:depth-idx)                                                      Output Shape              Param #
+=============================================================================================================================
+SegformerForSemanticSegmentation                                            [[1, 14, 56, 56]]         --
+├─SegformerModel: 1-1                                                       [[1, 64, 56, 56]]         --
+│    └─SegformerEncoder: 2-1                                                [[1, 64, 56, 56]]         --
+│    │    └─ModuleList: 3-10                                                --                        (recursive)
+│    │    └─ModuleList: 3-11                                                --                        (recursive)
+│    │    └─ModuleList: 3-12                                                --                        (recursive)
+│    │    └─ModuleList: 3-10                                                --                        (recursive)
+│    │    └─ModuleList: 3-11                                                --                        (recursive)
+│    │    └─ModuleList: 3-12                                                --                        (recursive)
+│    │    └─ModuleList: 3-10                                                --                        (recursive)
+│    │    └─ModuleList: 3-11                                                --                        (recursive)
+│    │    └─ModuleList: 3-12                                                --                        (recursive)
+│    │    └─ModuleList: 3-10                                                --                        (recursive)
+│    │    └─ModuleList: 3-11                                                --                        (recursive)
+│    │    └─ModuleList: 3-12                                                --                        (recursive)
+├─SegformerDecodeHead: 1-2                                                  [1, 14, 56, 56]           --
+│    └─ModuleList: 2-2                                                      --                        --
+│    │    └─SegformerMLP: 3-13                                              [1, 3136, 768]            49,920
+│    │    └─SegformerMLP: 3-14                                              [1, 784, 768]             99,072
+│    │    └─SegformerMLP: 3-15                                              [1, 196, 768]             246,528
+│    │    └─SegformerMLP: 3-16                                              [1, 49, 768]              393,984
+│    └─Conv2d: 2-3                                                          [1, 768, 56, 56]          2,359,296
+│    └─BatchNorm2d: 2-4                                                     [1, 768, 56, 56]          1,536
+│    └─ReLU: 2-5                                                            [1, 768, 56, 56]          --
+│    └─Dropout: 2-6                                                         [1, 768, 56, 56]          --
+│    └─Conv2d: 2-7                                                          [1, 14, 56, 56]           10,766
+=============================================================================================================================
+Total params: 64,050,830
+Trainable params: 64,050,830
+Non-trainable params: 0
+Total mult-adds (G): 8.67
+=============================================================================================================================
+Input size (MB): 3.61
+Forward/backward pass size (MB): 420.53
+Params size (MB): 256.20
+Estimated Total Size (MB): 680.34
+=============================================================================================================================
+Training for 20 epochs ...
+
+/ext3/miniconda3/lib/python3.10/site-packages/torch/autograd/__init__.py:251: UserWarning: Grad strides do not match bucket view strides. This may indicate grad was not created according to the gradient layout contract, or that the param's strides changed since DDP was constructed.  This is not an error, but may impair performance.
+grad.sizes() = [14, 768, 1, 1], strides() = [768, 1, 768, 768]
+bucket_view.sizes() = [14, 768, 1, 1], strides() = [768, 1, 1, 1] (Triggered internally at /opt/conda/conda-bld/pytorch_1699449181202/work/torch/csrc/distributed/c10d/reducer.cpp:320.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+/ext3/miniconda3/lib/python3.10/site-packages/torch/autograd/__init__.py:251: UserWarning: Grad strides do not match bucket view strides. This may indicate grad was not created according to the gradient layout contract, or that the param's strides changed since DDP was constructed.  This is not an error, but may impair performance.
+grad.sizes() = [14, 768, 1, 1], strides() = [768, 1, 768, 768]
+bucket_view.sizes() = [14, 768, 1, 1], strides() = [768, 1, 1, 1] (Triggered internally at /opt/conda/conda-bld/pytorch_1699449181202/work/torch/csrc/distributed/c10d/reducer.cpp:320.)
+  Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+/home/yl10745/.cache/huggingface/modules/evaluate_modules/metrics/evaluate-metric--mean_iou/08bc20f4f895f3caf75fb9e3fada1404bded3c3265243d05327cbb3b9326ffe9/mean_iou.py:259: RuntimeWarning: invalid value encountered in divide
+  iou = total_area_intersect / total_area_union
+/home/yl10745/.cache/huggingface/modules/evaluate_modules/metrics/evaluate-metric--mean_iou/08bc20f4f895f3caf75fb9e3fada1404bded3c3265243d05327cbb3b9326ffe9/mean_iou.py:260: RuntimeWarning: invalid value encountered in divide
+  acc = total_area_intersect / total_area_label
+Epoch [   1/  20]   Train Loss: 1.090e+00, mIOU: 0.4313/home/yl10745/.cache/huggingface/modules/evaluate_modules/metrics/evaluate-metric--mean_iou/08bc20f4f895f3caf75fb9e3fada1404bded3c3265243d05327cbb3b9326ffe9/mean_iou.py:259: RuntimeWarning: invalid value encountered in divide
+  iou = total_area_intersect / total_area_union
+/home/yl10745/.cache/huggingface/modules/evaluate_modules/metrics/evaluate-metric--mean_iou/08bc20f4f895f3caf75fb9e3fada1404bded3c3265243d05327cbb3b9326ffe9/mean_iou.py:260: RuntimeWarning: invalid value encountered in divide
+  acc = total_area_intersect / total_area_label
+   Val Loss: 1.141e+00, mIOU: 0.4172   Time: 410s
+Epoch [   2/  20]   Train Loss: 1.090e+00, mIOU: 0.4308   Val Loss: 1.135e+00, mIOU: 0.4197   Time: 403s
+Epoch [   3/  20]   Train Loss: 1.088e+00, mIOU: 0.4321   Val Loss: 1.129e+00, mIOU: 0.4227   Time: 402s
+Epoch [   4/  20]   Train Loss: 1.084e+00, mIOU: 0.4345   Val Loss: 1.127e+00, mIOU: 0.4227   Time: 404s
+Epoch [   5/  20]   Train Loss: 1.080e+00, mIOU: 0.4360   Val Loss: 1.120e+00, mIOU: 0.4248   Time: 405s
+Epoch [   6/  20]   Train Loss: 1.072e+00, mIOU: 0.4395   Val Loss: 1.116e+00, mIOU: 0.4262   Time: 403s
+Epoch [   7/  20]   Train Loss: 1.066e+00, mIOU: 0.4419   Val Loss: 1.113e+00, mIOU: 0.4277   Time: 405s
+Epoch [   8/  20]   Train Loss: 1.062e+00, mIOU: 0.4429   Val Loss: 1.108e+00, mIOU: 0.4299   Time: 411s
+Epoch [   9/  20]   Train Loss: 1.056e+00, mIOU: 0.4456   Val Loss: 1.106e+00, mIOU: 0.4320   Time: 418s
+Epoch [  10/  20]   Train Loss: 1.051e+00, mIOU: 0.4484   Val Loss: 1.102e+00, mIOU: 0.4332   Time: 428s
+Epoch [  11/  20]   Train Loss: 1.048e+00, mIOU: 0.4498   Val Loss: 1.100e+00, mIOU: 0.4334   Time: 420s
+Epoch [  12/  20]   Train Loss: 1.044e+00, mIOU: 0.4517   Val Loss: 1.097e+00, mIOU: 0.4339   Time: 420s
+Epoch [  13/  20]   Train Loss: 1.040e+00, mIOU: 0.4538   Val Loss: 1.094e+00, mIOU: 0.4345   Time: 420s
+Epoch [  14/  20]   Train Loss: 1.038e+00, mIOU: 0.4541   Val Loss: 1.092e+00, mIOU: 0.4352   Time: 420s
+Epoch [  15/  20]   Train Loss: 1.034e+00, mIOU: 0.4562   Val Loss: 1.090e+00, mIOU: 0.4362   Time: 415s
+Epoch [  16/  20]   Train Loss: 1.031e+00, mIOU: 0.4564   Val Loss: 1.089e+00, mIOU: 0.4377   Time: 415s
+Epoch [  17/  20]   Train Loss: 1.029e+00, mIOU: 0.4571   Val Loss: 1.087e+00, mIOU: 0.4383   Time: 415s
+Epoch [  18/  20]   Train Loss: 1.029e+00, mIOU: 0.4572   Val Loss: 1.086e+00, mIOU: 0.4399   Time: 415s
+Epoch [  19/  20]   Train Loss: 1.026e+00, mIOU: 0.4573   Val Loss: 1.084e+00, mIOU: 0.4402   Time: 421s
+Epoch [  20/  20]   Train Loss: 1.022e+00, mIOU: 0.4599   Val Loss: 1.083e+00, mIOU: 0.4405   Time: 424s
+Training completed in 138 min 41 s
+Best Validation Jaccard: 0.4405
+------------------------------

@@ -3,8 +3,8 @@
 #SBATCH --account=csci_ga_2271_001-2023fa
 #SBATCH --partition=n1c16m96-v100-2
 #SBATCH --gres=gpu:v100:2
-#SBATCH --time=02:00:00 
-#SBATCH --job-name=unet
+#SBATCH --time=06:00:00 
+#SBATCH --job-name=1-segformer
 #SBATCH --output=job_%j.out
 
 
